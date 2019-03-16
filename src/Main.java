@@ -42,7 +42,6 @@ public class Main {
 
         scrollByXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[4]/div[2]/div[1]/input");
         fillFormXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[4]/div[2]/div[1]/input", dateGenerate());
-        driver.findElement(By.xpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[4]/div[2]/div[1]/input")).sendKeys(Keys.RETURN);
 
         findByXpathAndClick("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[4]/div[2]/div[2]/btn-radio-group/div/label[2]");
 
@@ -61,7 +60,7 @@ public class Main {
         findByXpathAndClick("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[4]/button");
 
         scrollToTop();
-        Wait<WebDriver> wait = new WebDriverWait(driver, 100, 2000);
+        Wait<WebDriver> wait = new WebDriverWait(driver, 10, 2000);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[1]/h2"))));
         scrollByXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[1]/h2");
         findByXpathAndClick("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[1]/h2");
