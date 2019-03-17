@@ -29,47 +29,47 @@ public class Main {
         driver.manage().window().maximize();
         driver.get(url);
 
-        findByXpathAndClick("//*[@id=\"main-navbar-collapse\"]/ol[1]/li[2]/a");
-        findByXpathAndClick("//*[@id=\"rgs-main-menu-insurance-dropdown\"]/div[1]/div[1]/div/div[2]/div[2]/ul/li[2]/a");
+        findByXpathAndClick("//ol/li/a[contains(text(),'Страхование')]");
+        findByXpathAndClick("//*[contains(text(),'Выезжающим')]");
 
-        scrollByXpath("/html/body/div[6]/div/div[2]/div/div[4]/div[1]/div/div[2]/a");
-        findByXpathAndClick("/html/body/div[6]/div/div[2]/div/div[4]/div[1]/div/div[2]/a");
+        scrollByXpath("//a[contains(text(),'Рассчитать')]");
+        findByXpathAndClick("//a[contains(text(),'Рассчитать')]");
 
-        textCompare("/html/body/div[4]/div[1]/div/span", "Страхование выезжающих за рубеж");
+        textCompare("//body/div/div/div/span[contains(@class, 'h1')]", "Страхование выезжающих за рубеж");
 
-        findByXpathAndClick("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[1]/btn-radio-group/div/button[2]");
+        findByXpathAndClick("//*[contains(text(), 'Несколько')]");
         fillFormCountries("Countries", "Испания");
 
-        scrollByXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[4]/div[2]/div[1]/input");
-        fillFormXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[4]/div[2]/div[1]/input", dateGenerate());
+        scrollByXpath("//form/div/div/div/div/input[contains(@class, 'form-control width-xs-9rem ')]");
+        fillFormXpath("//form/div/div/div/div/input[contains(@class, 'form-control width-xs-9rem ')]", dateGenerate());
 
-        findByXpathAndClick("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[4]/div[2]/div[2]/btn-radio-group/div/label[2]");
+        findByXpathAndClick("//*[contains(text(), 'Не более 90')]");
 
-        fillFormXpathName("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[7]/div/div[2]/div[1]/div/div[1]/div/input", "IVANOV", "IVAN");
+        fillFormXpathName("//input[contains(@class,'form-control')][@data-test-name='FullName']", "IVANOV", "IVAN");
 
-        scrollByXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[7]/div/div[2]/div[2]/input");
-        fillFormXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[7]/div/div[2]/div[2]/input", "11121998");
+        scrollByXpath("//*[@data-test-name='BirthDate']");
+        fillFormXpath("//*[@data-test-name='BirthDate']", "11121998");
 
-        scrollByXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[10]/div[1]/div[1]/div[1]/div/input");
-        clickCheckBox("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[2]/div[10]/div[1]/div[1]/div[1]/div");
+        scrollByXpath("//div[10]/div[1]/div[1]/div[1]/div/input");
+        clickCheckBox("//div[10]/div[1]/div[1]/div[1]/div");
 
-        scrollByXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[3]/adaptive-checkbox/label/input");
-        clickCheckBox("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[3]/adaptive-checkbox/label/input");
+        scrollByXpath("//input[contains(@data-test-name , 'IsProcessingPersonalDataTo')]");
+        clickCheckBox("//input[contains(@data-test-name , 'IsProcessingPersonalDataTo')]");
 
-        scrollByXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[4]/button");
-        findByXpathAndClick("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[2]/div/div[1]/div/form/div[4]/button");
+        scrollByXpath("//*[@data-test-name='NextButton'][contains(@data-bind,'Misc.NextButton')]");
+        findByXpathAndClick("//*[@data-test-name='NextButton'][contains(@data-bind,'Misc.NextButton')]");
 
         scrollToTop();
         Wait<WebDriver> wait = new WebDriverWait(driver, 10, 2000);
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[1]/h2"))));
-        scrollByXpath("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[1]/h2");
-        findByXpathAndClick("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[1]/h2");
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[contains(text(),'Расчет')]"))));
+        scrollByXpath("//*[contains(text(),'Расчет')]");
+        findByXpathAndClick("//*[contains(text(),'Расчет')]");
 
-        textCompare("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[3]/div/div/div/div[1]/span[2]/span", "Многократные поездки в течение года");
-        textCompare("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[3]/div/div/div/div[5]/span[2]/span[1]/strong", "Шенген");
-        textCompare("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[3]/div/div/div/div[6]/div/span[2]/span/strong", "IVANOV IVAN");
-        textCompare("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[3]/div/div/div/div[6]/div/span[2]/span/span/strong", "11.12.1998");
-        textCompare("//*[@id=\"calc-vzr-steps\"]/myrgs-steps-partner-auth/div[1]/div/div/div[1]/div[3]/div/div/div/div[7]/div[1]/div", "Включен");
+        textCompare("//div[1]/div[3]/div/div/div/div[1]/span[2]/span", "Многократные поездки в течение года");
+        textCompare("//span/span/strong[contains(@data-bind, 'text: Name')]", "Шенген");
+        textCompare("//strong[contains(@data-bind, 'text: Last')]", "IVANOV IVAN");
+        textCompare("//strong[contains(@data-bind, 'text: Birth')]", "11.12.1998");
+        textCompare("//div[7]/div[1]/div/span[2]/span", "Включен");
 
 
         driver.close();
@@ -118,6 +118,7 @@ public class Main {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", ScrollLocation);
     }
+
 
     /**
      * Метод скроллящий наверх страницы
