@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 public class Main {
     private static WebDriver driver;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver", "drv/chromedriver.exe");
 
@@ -35,6 +35,7 @@ public class Main {
         scrollByXpath("//a[contains(text(),'Рассчитать')]");
         findByXpathAndClick("//a[contains(text(),'Рассчитать')]");
 
+        Thread.sleep(2000);
         textCompare("//body/div/div/div/span[contains(@class, 'h1')]", "Страхование выезжающих за рубеж");
 
         findByXpathAndClick("//*[contains(text(), 'Несколько')]");
@@ -70,6 +71,8 @@ public class Main {
         textCompare("//strong[contains(@data-bind, 'text: Last')]", "IVANOV IVAN");
         textCompare("//strong[contains(@data-bind, 'text: Birth')]", "11.12.1998");
         textCompare("//div[7]/div[1]/div/span[2]/span", "Включен");
+
+        Thread.sleep(2000);
 
 
         driver.close();
