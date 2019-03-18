@@ -88,7 +88,7 @@ public class Main {
             textCompare("//strong[contains(@data-bind, 'text: Birth')]", "11.12.1998");
             textCompare("//div[contains(@data-bind, 'Актив')]/div[@class='summary-row']/span[@class='summary-value']/span", "Включен");
 
-            Thread.sleep(1000);
+//            Thread.sleep(1000);
             driver.close();
 
         } catch (Exception e) {
