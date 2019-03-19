@@ -5,8 +5,8 @@
  */
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,8 +24,9 @@ public class Main {
         try {
             System.setProperty("webdriver.chrome.driver", "drv/chromedriver.exe");
             driver = new ChromeDriver();
+
             String url = "https://www.rgs.ru/";
-            driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             driver.manage().window().maximize();
             driver.get(url);
 
@@ -61,25 +62,21 @@ public class Main {
 
             // Заполнение ФИО
             scrollByXpath("//input[contains(@class,'form-control')][@data-test-name='FullName']");
-            fillFormXpathName("//input[contains(@class,'form-control')][@data-test-name='FullName']", "IVANOV", "IVAN");
+            fillFormXpathName("//input[contains(@class,'form-control')][@data-test-name='FullName']", "IVANOV IVAN");
 
             // Заполнение даты рождения
             scrollByXpath("//*[@data-test-name='BirthDate']");
             fillFormXpath("//*[@data-test-name='BirthDate']", "11121998");
 
             // Чек-бокс планируется ли активный отдых
-            scrollByXpath("//div[contains(@data-bind,'active')]/div[contains(@class,'toggle')]");
             clickCheckBox("//div[contains(@data-bind,'active')]/div[contains(@class,'toggle')]");
 
             // Чек-бокс согласие на обработку персональных данных
-            scrollByXpath("//input[contains(@data-test-name , 'IsProcessingPersonalDataTo')]");
             clickCheckBox("//input[contains(@data-test-name , 'IsProcessingPersonalDataTo')]");
 
             // Нажатие кнопки рассчитать
             scrollByXpath("//*[@data-test-name='NextButton'][contains(@data-bind,'Misc.NextButton')]");
             findByXpathAndClick("//*[@data-test-name='NextButton'][contains(@data-bind,'Misc.NextButton')]");
-
-            Thread.sleep(5000);
 
             // Сравение ожидаемых и актуальных данных
             textCompare("//*[contains(@class,'summary-value')][contains(@data-bind,'Trips')]", "Многократные поездки в течение года");
@@ -88,7 +85,6 @@ public class Main {
             textCompare("//strong[contains(@data-bind, 'text: Birth')]", "11.12.1998");
             textCompare("//div[contains(@data-bind, 'Актив')]/div[@class='summary-row']/span[@class='summary-value']/span", "Включен");
 
-//            Thread.sleep(1000);
             driver.close();
 
         } catch (Exception e) {
@@ -104,6 +100,9 @@ public class Main {
      * @param xPath - xPath чек-бокса
      */
     private static void clickCheckBox(String xPath) {
+        WebElement ScrollLocation = driver.findElement(By.xpath(xPath));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", ScrollLocation);
         if (!driver.findElement(By.xpath(xPath)).isSelected()) {
             driver.findElement(By.xpath(xPath)).click();
         }
@@ -140,9 +139,11 @@ public class Main {
      * @param xPath xPath элемента
      */
     public static void scrollByXpath(String xPath) {
+        WebElement element = (new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath(xPath))));
         WebElement ScrollLocation = driver.findElement(By.xpath(xPath));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", ScrollLocation);
+
     }
 
     /**
@@ -167,7 +168,6 @@ public class Main {
 
     public static void fillFormXpath(String xPath, String text) {
         driver.findElement(By.xpath(xPath)).click();
-        driver.findElement(By.xpath(xPath)).clear();
         driver.findElement(By.xpath(xPath)).sendKeys(text);
     }
 
@@ -175,13 +175,11 @@ public class Main {
      * Метод для заполнения фио
      *
      * @param xPath     xPath элемента
-     * @param lastName  фамилия
-     * @param firstName имя
+     * @param name  фамилия
      */
-    public static void fillFormXpathName(String xPath, String lastName, String firstName) {
+    public static void fillFormXpathName(String xPath, String name) {
         driver.findElement(By.xpath(xPath)).click();
-        driver.findElement(By.xpath(xPath)).clear();
-        driver.findElement(By.xpath(xPath)).sendKeys(lastName, Keys.SPACE, firstName);
+        driver.findElement(By.xpath(xPath)).sendKeys(name);
     }
 
     /**
@@ -199,4 +197,3 @@ public class Main {
         return dateString;
     }
 }
-
