@@ -174,12 +174,13 @@ public class Main {
     /**
      * Метод для заполнения фио
      *
-     * @param xPath     xPath элемента
+     * @param xPath xPath элемента
      * @param name  фамилия
      */
     public static void fillFormXpathName(String xPath, String name) {
-        driver.findElement(By.xpath(xPath)).click();
-        driver.findElement(By.xpath(xPath)).sendKeys(name);
+        JavascriptExecutor jst = (JavascriptExecutor) driver;
+        jst.executeScript("arguments[1].value = arguments[0]; ", name, driver.findElement(By.xpath((xPath))));
+        driver.findElement(By.xpath(xPath)).sendKeys(Keys.DOWN);
     }
 
     /**
